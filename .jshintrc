@@ -1,0 +1,23 @@
+/**
+ * USAGE:
+ * Run on save:
+ *  - Install the NPM package for Node.JS
+ *  - Install the Sublime package
+ * Run on build i.e. Grunt/Gulp:
+ *  - Install Node.JS package
+ *  - Create Grunt file with appropriate task
+ */
+{
+  "indent": 2,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "quotmark": "single",
+  "undef": true,
+  "unused": true,
+  "strict": true,
+  "browser": true,
+  "globals": {
+    "$": false
+  }
+}
