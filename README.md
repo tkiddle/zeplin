@@ -1,7 +1,7 @@
-Zeplin Framework
+ZeplinJS Framework
 ================
 
-Zeplin is a bare-bones JavaScript frame work with simplicity
+ZeplinJS is a bare-bones JavaScript framework with simplicity
 and efficiency in mind. All browsers from ie8 onwards are supported.
 
 Features include:
