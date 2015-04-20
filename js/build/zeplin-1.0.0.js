@@ -238,6 +238,10 @@ window.zeplin = (function() {
       _xhrCreate = function(opts) {
         var xhr, method, body;
 
+        if(!opts || !opts.url) {
+          throw new Error('Please supply a URL to the ajax method.');
+        }
+
         xhr = new XMLHttpRequest();
         method = opts.body ? 'POST' : opts.method ? opts.method.toUpperCase() : 'GET';
 
@@ -249,8 +253,13 @@ window.zeplin = (function() {
 
         xhr.open(method, opts.url, (opts.async === undefined ? true : false));
 
-        // Set the default request headers
+        // We set this header allowing frameworks/applications to detect that
+        // This is an AJAX Request allowing them to serve up data accordingly.
+        // i.e. JSON data for AJAX requests and HTML for non-AJAX request.
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+        // Setting this header tells the server that we are going to send over
+        // Encoded URL containing our body parameters in the content... i think.
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         if(opts.headers) {
@@ -264,7 +273,6 @@ window.zeplin = (function() {
 
       _xhrComplete = function(opts) {
         var data;
-
         this.onreadystatechange = function() {
           if(this.readyState == 4) {
             if(this.status == 200 && typeof opts.success === 'function') {
