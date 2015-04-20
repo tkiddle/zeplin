@@ -1,4 +1,6 @@
 css
-node_modules
-.sass-cache
+.grunt
 .DS_Store
+.sass-cache
+node_modules
+_SpecRunner.html

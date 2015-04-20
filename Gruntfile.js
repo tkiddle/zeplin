@@ -22,15 +22,17 @@ module.exports = function(grunt) {
 
     clean: ['<%= js.dist %>/*.min.js'],
 
-    watch: {
-      scripts: {
-        files: ['<%= js.dev %>/*.js', '!<%= js.dist %>/*.min.js'],
-        tasks: ['clean', 'jshint', 'concat', 'uglify'] // Run these tasks on save
-      }
-    },
-
     jshint: {
       all: ['<%= js.dev %>/*.js', '!<%= js.dist %>/*.js']
+    },
+
+    jasmine: {
+      src: ['<%= js.dev %>/*.js', '!<%= js.dist %>/*.js'],
+      options: {
+        specs: 'spec/**/*Spec.js',
+        helpers: 'spec/helpers/*.js',
+        keepRunner: true
+      }
     },
 
     concat: {
@@ -58,11 +60,20 @@ module.exports = function(grunt) {
           ['<%= js.dist %>/zeplin-<%= pkg.version %>.min.js']
         }
       }
+    },
+
+    watch: {
+      scripts: {
+        files: ['<%= js.dev %>/*.js', '!<%= js.dist %>/*.min.js'],
+        tasks: ['clean', 'jshint', 'jasmine', 'concat', 'uglify'] // Run these tasks on save
+      }
     }
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
